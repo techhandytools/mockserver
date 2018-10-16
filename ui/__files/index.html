@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MockServer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+          crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.18.0/jsoneditor.min.css" rel="stylesheet"
+          type="text/css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/5.18.0/jsoneditor.min.js"></script>
+</head>
+<header class="bg-success text-white p-2 mb-3" id="main-header">
+    <div class="container">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-md-4">
+                <h1 id="header-title">MockServer</h1>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6">
+                <input type="text" placeholder="Search Stubs..." id="filter" class="form-control"
+                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Stubs...'">
+            </div>
+        </div>
+
+    </div>
+</header>
+<div class="container">
+    <div id="main" class="card card-body col-md-10 mx-auto">
+        <form id="addForm" class="form-inline mb-3">
+            <input type="text" id="stub" class="form-control mr-2" data-toggle="tooltip" title="e.g: /api/v2/json">
+            <input type="submit" value="Add" class="btn btn-dark">
+        </form>
+        <h2 class="title"></h2>
+        <ul id="stubs" class="list-group"></ul>
+    </div>
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary"
+                     style="padding:16px 16px;color:#FFF;border-bottom:2px dashed #337AB7;">
+                    <h5 class="modal-title" id="editModalLabel">Edit Stub</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <fieldset disabled>
+                            <div class="form-group">
+                                <label for="request-url" class="col-form-label col-form-label-sm">Url</label>
+                                <input type="text" class="form-control form-control-sm" id="request-url">
+                            </div>
+                        </fieldset>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="response-status" class="col-form-label col-form-label-sm">Status</label>
+                                <input type="text" class="form-control form-control-sm" id="response-status"
+                                       placeholder="200">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="delay-time" class="col-form-label col-form-label-sm">Latency</label>
+                                <input type="number" min="1" value="10" class="form-control form-control-sm"
+                                       id="delay-time"
+                                       aria-describedby="timeHelpBlock" data-toggle="tooltip" data-placement="top"
+                                       title="median 50th percentile of the distribution in millis">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="delay-sigma" class="col-form-label col-form-label-sm">Sigma</label>
+                                <input type="number" min="0" max="1" value="0.40" step="0.10"
+                                       class="form-control form-control-sm"
+                                       id="delay-sigma" placeholder="0.4" aria-describedby="sigmaHelpBlock"
+                                       data-toggle="tooltip" data-placement="top"
+                                       title="sigma standard deviation of the distribution, a larger value produces a longer tail">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="response-body" class="col-form-label col-form-label-sm">Body</label>
+                            <div id="response-body"></div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary btn-sm" onclick="saveStubModal()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<body>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"
+        integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+<script src="main.js"></script>
+</body>
+
+</html>

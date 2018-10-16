@@ -1,0 +1,11 @@
+com/mockserver/MockServer.class
+com/mockserver/config/ServerConfig.class
+com/mockserver/cluster/impl/CuratorZKManagerImpl.class
+com/mockserver/util/StubMappingsUtil$1.class
+com/mockserver/util/BodyTransformer.class
+com/mockserver/util/StubMappingsUtil.class
+com/mockserver/db/MongoDAO.class
+com/mockserver/util/MongoDBMappingsSource.class
+com/mockserver/config/MongoDBConfig.class
+com/mockserver/config/MockConfig.class
+com/mockserver/config/ZkConfig.class
