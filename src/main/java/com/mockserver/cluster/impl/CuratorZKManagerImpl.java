@@ -15,17 +15,20 @@ public class CuratorZKManagerImpl {
 
 	/**
 	 * To create a client for zoo keeper
+	 *
 	 * @param zkConfig
 	 * @return
 	 */
 	public CuratorFramework createClient(final ZkConfig zkConfig) {
 		logger.info("Creating Curator client with the config :: " + zkConfig);
 		RetryPolicy retryPolicy = new ExponentialBackoffRetry(zkConfig.getBaseSleepTimeMills(), zkConfig.getMaxRetires());
+		logger.info("Retry Policy initialized and creating a new client");
 		return CuratorFrameworkFactory.newClient(zkConfig.getHost(), zkConfig.getSessionTimeout(), zkConfig.getConnectionTimeout(), retryPolicy);
 	}
 
 	/**
 	 * To create and start the zoo keeper client
+	 *
 	 * @param zkConfig
 	 * @return
 	 */
@@ -33,6 +36,7 @@ public class CuratorZKManagerImpl {
 		CuratorFramework client = createClient(zkConfig);
 		logger.info("Starting the Curator client with the config :: " + zkConfig);
 		client.start();
+		logger.info("Started the Curator client");
 		return client;
 	}
 }
